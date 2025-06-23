@@ -1,0 +1,27 @@
+# Flask and web framework dependencies
+Flask==2.3.3
+Flask-CORS==4.0.0
+
+# Supabase client
+supabase==1.2.0
+
+# Environment variables
+python-dotenv==1.0.0
+
+# HTTP requests (if needed for additional API calls)
+requests==2.31.0
+
+# JSON Web Token handling (if needed for additional JWT operations)
+PyJWT==2.8.0
+
+# Logging and utilities
+python-dateutil==2.8.2
+
+# WSGI server for production
+gunicorn==21.2.0
+
+# Development dependencies (optional)
+# pytest==7.4.2
+# pytest-flask==1.2.0
+# black==23.7.0
+# flake8==6.0.0
