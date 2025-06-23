@@ -23,15 +23,8 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # Import and register blueprints
-try:
-    from routes.auth import auth_bp
-    app.register_blueprint(auth_bp, url_prefix='/auth')
-    logger.info("Auth blueprint registered successfully")
-except ImportError as e:
-    logger.error(f"Failed to import auth blueprint: {e}")
-    raise
-
-# Import require_auth decorator
+from routes.auth import auth_bp
+from routes.livekit_routes import livekit_bp
 from utils.auth import require_auth, create_supabase_client
 
 @app.route('/health', methods=['GET'])
@@ -40,7 +33,9 @@ def health_check():
     return jsonify({
         'status': 'healthy', 
         'timestamp': datetime.utcnow().isoformat(),
-        'service': 'Flask Backend API'
+        'service': 'AITutor Backend API',
+        'version': '1.0.0',
+        'features': ['auth', 'profile', 'livekit']
     })
 
 @app.route('/profile', methods=['GET'])
@@ -235,6 +230,10 @@ def internal_error(error):
 def log_request_info():
     """Log request information"""
     logger.info(f"{request.method} {request.url} - {request.remote_addr}")
+
+# Register blueprints
+app.register_blueprint(auth_bp, url_prefix='/auth')
+app.register_blueprint(livekit_bp, url_prefix='/livekit')
 
 if __name__ == '__main__':
     # Get configuration from environment or use defaults
