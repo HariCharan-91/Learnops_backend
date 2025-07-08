@@ -25,7 +25,7 @@ def handle_livekit_errors(f):
     return decorated_function
 
 @livekit_bp.route('/create-room', methods=['POST'])
-@cross_origin()
+@cross_origin(supports_credentials=True)
 @require_auth
 @handle_livekit_errors
 def create_room():
@@ -96,7 +96,7 @@ def create_room():
         }), 500
 
 @livekit_bp.route('/generate-token', methods=['POST'])
-@cross_origin()
+@cross_origin(supports_credentials=True)
 @require_auth
 @handle_livekit_errors
 def generate_token():
@@ -179,7 +179,7 @@ def generate_token():
         }), 500
 
 @livekit_bp.route('/active-rooms', methods=['GET'])
-@cross_origin()
+@cross_origin(supports_credentials=True)
 @require_auth
 @handle_livekit_errors
 def get_active_rooms():
@@ -229,7 +229,7 @@ def get_active_rooms():
         }), 500
 
 @livekit_bp.route('/room/<room_id>', methods=['DELETE'])
-@cross_origin()
+@cross_origin(supports_credentials=True)
 @require_auth
 @handle_livekit_errors
 def delete_room(room_id):
@@ -281,7 +281,7 @@ def delete_room(room_id):
         }), 500
 
 @livekit_bp.route('/room/<room_name>/info', methods=['GET'])
-@cross_origin()
+@cross_origin(supports_credentials=True)
 @require_auth
 @handle_livekit_errors
 def get_room_info(room_name):
@@ -327,7 +327,7 @@ def get_room_info(room_name):
 
 # Health check endpoint for LiveKit service
 @livekit_bp.route('/health', methods=['GET'])
-@cross_origin()
+@cross_origin(supports_credentials=True)
 def livekit_health():
     """
     Check LiveKit service health

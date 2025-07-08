@@ -26,6 +26,7 @@ logger = logging.getLogger(__name__)
 from routes.auth import auth_bp
 from routes.livekit_routes import livekit_bp
 from utils.auth import require_auth, create_supabase_client
+from routes.assemblyai_stt import assemblyai_stt_bp
 
 @app.route('/health', methods=['GET'])
 def health_check():
@@ -234,6 +235,8 @@ def log_request_info():
 # Register blueprints
 app.register_blueprint(auth_bp, url_prefix='/auth')
 app.register_blueprint(livekit_bp, url_prefix='/livekit')
+app.register_blueprint(assemblyai_stt_bp, url_prefix='/assemblyai_stt')
+
 
 if __name__ == '__main__':
     # Get configuration from environment or use defaults
